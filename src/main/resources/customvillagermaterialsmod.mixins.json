@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.architects.CustomVillagerMaterialsMod.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "CustomTradeMaterial"
+  ],
+  "client": [
+    "ExampleMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
