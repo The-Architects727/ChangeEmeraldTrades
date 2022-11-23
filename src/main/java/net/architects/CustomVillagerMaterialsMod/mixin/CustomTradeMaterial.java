@@ -176,7 +176,8 @@ public class CustomTradeMaterial{
 
     private static boolean Illegal(Item item) {
         return item == Items.BARRIER || item == null || item == Items.COMMAND_BLOCK || item == Items.COMMAND_BLOCK_MINECART ||
-                item == Items.CHAIN_COMMAND_BLOCK || item == Items.REPEATING_COMMAND_BLOCK || item == Items.STRUCTURE_BLOCK || item == Items.STRUCTURE_VOID;
+                item == Items.CHAIN_COMMAND_BLOCK || item == Items.REPEATING_COMMAND_BLOCK || item == Items.STRUCTURE_BLOCK ||
+                item == Items.STRUCTURE_VOID || item == Items.AIR;
     }
 
 }
