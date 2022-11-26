@@ -18,53 +18,106 @@ import java.util.Random;
 public class CustomTradeMaterial{
 
     @ModifyVariable(method = "<init>(Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;IIIFI)V", at = @At("HEAD"), ordinal = 0)
-    private static ItemStack StormlightMod$replaceEmeraldsWithDiamondsBase1(ItemStack item)
+    private static ItemStack StormlightMod$replaceFirstBuyItem(ItemStack item)
     {
         if(ModConfigs.FirstBuyMaterialInt == 18) {
             ItemStack itemStack = disableAllItems();
             return itemStack;
+        } else if (ModConfigs.FirstBuyMaterialInt == 19){
+            if (item.getItem() == Items.EMERALD) {
+                ItemStack itemStack;
+                Item itemChosen = getRandomItem();
+                if (itemChosen.getMaxCount() < item.getCount()) {
+                    itemStack = new ItemStack(itemChosen, itemChosen.getMaxCount());
+                } else {
+                    itemStack = new ItemStack(itemChosen, item.getCount());
+                }
+                return itemStack;
+            }
         } else if (ModConfigs.FirstBuyMaterialInt == 20){
-            ItemStack itemStack = new ItemStack(getRandomItem(), item.getCount());
+            ItemStack itemStack;
+            Item itemChosen = getRandomItem();
+            if (itemChosen.getMaxCount() < item.getCount()) {
+                itemStack = new ItemStack(itemChosen, itemChosen.getMaxCount());
+            } else {
+                itemStack = new ItemStack(itemChosen, item.getCount());
+            }
             return itemStack;
         } else {
             if (item.getItem() == Items.EMERALD)
                 item = new ItemStack(returnItemFromInt(ModConfigs.FirstBuyMaterialInt), item.getCount());
             return item;
         }
-
+        return new ItemStack(Items.EMERALD, item.getCount());
     }
 
     @ModifyVariable(method = "<init>(Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;IIIFI)V", at = @At("HEAD"), ordinal = 1)
-    private static ItemStack StormlightMod$replaceEmeraldsWithDiamondsBase2(ItemStack item)
+    private static ItemStack StormlightMod$replaceSecondBuyItem(ItemStack item)
     {
         if(ModConfigs.SecondBuyMaterialInt == 18) {
             ItemStack itemStack = disableAllItems();
             return itemStack;
+        } else if (ModConfigs.SecondBuyMaterialInt == 19){
+            if (item.getItem() == Items.EMERALD) {
+                ItemStack itemStack;
+                Item itemChosen = getRandomItem();
+                if (itemChosen.getMaxCount() < item.getCount()) {
+                    itemStack = new ItemStack(itemChosen, itemChosen.getMaxCount());
+                } else {
+                    itemStack = new ItemStack(itemChosen, item.getCount());
+                }
+                return itemStack;
+            }
         } else if (ModConfigs.SecondBuyMaterialInt == 20){
-            ItemStack itemStack = new ItemStack(getRandomItem(), item.getCount());
+            ItemStack itemStack;
+            Item itemChosen = getRandomItem();
+            if (itemChosen.getMaxCount() < item.getCount()) {
+                itemStack = new ItemStack(itemChosen, itemChosen.getMaxCount());
+            } else {
+                itemStack = new ItemStack(itemChosen, item.getCount());
+            }
             return itemStack;
         } else {
             if (item.getItem() == Items.EMERALD)
                 item = new ItemStack(returnItemFromInt(ModConfigs.SecondBuyMaterialInt), item.getCount());
             return item;
         }
+        return new ItemStack(Items.EMERALD, item.getCount());
 
     }
 
     @ModifyVariable(method = "<init>(Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;IIIFI)V", at = @At("HEAD"), ordinal = 2)
-    private static ItemStack StormlightMod$replaceEmeraldsWithDiamondsBase3(ItemStack item)
+    private static ItemStack StormlightMod$replaceSellItem(ItemStack item)
     {
         if(ModConfigs.SellMaterialInt == 18) {
             ItemStack itemStack = disableAllItems();
             return itemStack;
+        } else if (ModConfigs.SellMaterialInt == 19){
+            if (item.getItem() == Items.EMERALD) {
+                ItemStack itemStack;
+                Item itemChosen = getRandomItem();
+                if (itemChosen.getMaxCount() < item.getCount()) {
+                    itemStack = new ItemStack(itemChosen, itemChosen.getMaxCount());
+                } else {
+                    itemStack = new ItemStack(itemChosen, item.getCount());
+                }
+                return itemStack;
+            }
         } else if (ModConfigs.SellMaterialInt == 20){
-            ItemStack itemStack = new ItemStack(getRandomItem(), item.getCount());
+            ItemStack itemStack;
+            Item itemChosen = getRandomItem();
+            if (itemChosen.getMaxCount() < item.getCount()) {
+                itemStack = new ItemStack(itemChosen, itemChosen.getMaxCount());
+            } else {
+                itemStack = new ItemStack(itemChosen, item.getCount());
+            }
             return itemStack;
         } else {
             if (item.getItem() == Items.EMERALD)
                 item = new ItemStack(returnItemFromInt(ModConfigs.SellMaterialInt), item.getCount());
             return item;
         }
+        return new ItemStack(Items.EMERALD, item.getCount());
 
     }
     private static Item returnItemFromInt(int integerDenotion) {
@@ -133,14 +186,6 @@ public class CustomTradeMaterial{
 
             case 17 :
                 item = Items.DIRT;
-                break;
-
-            case 19 :
-                item = getRandomItem();
-                break;
-
-            case 20 :
-                item = getRandomItem();
                 break;
 
             default :
