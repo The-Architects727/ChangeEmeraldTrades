@@ -201,6 +201,7 @@ public class SimpleConfig {
         }
     }
 
+
     /**
      * Returns boolean value from config corresponding to the given
      * key, or the default boolean if the key is missing.

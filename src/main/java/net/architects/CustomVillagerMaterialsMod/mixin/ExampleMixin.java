@@ -11,6 +11,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ExampleMixin {
 	@Inject(at = @At("HEAD"), method = "init()V")
 	private void init(CallbackInfo info) {
-		CustomeVillagerMaterialsMod.LOGGER.info("Replace Trades Mod is Working as Intended.     Happy Trading");
+		CustomeVillagerMaterialsMod.LOGGER.info("ReplaceTradesMod is Working as Intended.     Happy Trading");
 	}
 }

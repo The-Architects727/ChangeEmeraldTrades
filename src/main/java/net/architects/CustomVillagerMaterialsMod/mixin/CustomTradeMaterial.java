@@ -17,14 +17,15 @@ import java.util.Random;
 @Mixin(TradeOffer.class)
 public class CustomTradeMaterial{
 
+
     @ModifyVariable(method = "<init>(Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;IIIFI)V", at = @At("HEAD"), ordinal = 0)
     private static ItemStack StormlightMod$replaceFirstBuyItem(ItemStack item)
     {
+        Random roll = new Random();
         if(ModConfigs.FirstBuyMaterialInt == 18) {
             ItemStack itemStack = disableAllItems();
             return itemStack;
-        } else if (ModConfigs.FirstBuyMaterialInt == 19){
-            if (item.getItem() == Items.EMERALD) {
+        } else if (ModConfigs.FirstBuyMaterialInt == 19 && item.getItem() == Items.EMERALD){
                 ItemStack itemStack;
                 Item itemChosen = getRandomItem();
                 if (itemChosen.getMaxCount() < item.getCount()) {
@@ -33,14 +34,18 @@ public class CustomTradeMaterial{
                     itemStack = new ItemStack(itemChosen, item.getCount());
                 }
                 return itemStack;
-            }
         } else if (ModConfigs.FirstBuyMaterialInt == 20){
             ItemStack itemStack;
             Item itemChosen = getRandomItem();
-            if (itemChosen.getMaxCount() < item.getCount()) {
-                itemStack = new ItemStack(itemChosen, itemChosen.getMaxCount());
+//            if (itemChosen.getMaxCount() < item.getCount()) {
+//                itemStack = new ItemStack(itemChosen, itemChosen.getMaxCount());
+//            } else {
+//                itemStack = new ItemStack(itemChosen, item.getCount());
+//            }
+            if(item.getCount() == 0) {
+                itemStack = item;
             } else {
-                itemStack = new ItemStack(itemChosen, item.getCount());
+                itemStack = new ItemStack(itemChosen, roll.nextInt(itemChosen.getMaxCount()) + 1);
             }
             return itemStack;
         } else {
@@ -48,33 +53,36 @@ public class CustomTradeMaterial{
                 item = new ItemStack(returnItemFromInt(ModConfigs.FirstBuyMaterialInt), item.getCount());
             return item;
         }
-        return new ItemStack(Items.EMERALD, item.getCount());
     }
 
     @ModifyVariable(method = "<init>(Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;IIIFI)V", at = @At("HEAD"), ordinal = 1)
     private static ItemStack StormlightMod$replaceSecondBuyItem(ItemStack item)
     {
+        Random roll = new Random();
         if(ModConfigs.SecondBuyMaterialInt == 18) {
             ItemStack itemStack = disableAllItems();
             return itemStack;
-        } else if (ModConfigs.SecondBuyMaterialInt == 19){
-            if (item.getItem() == Items.EMERALD) {
-                ItemStack itemStack;
-                Item itemChosen = getRandomItem();
+        } else if (ModConfigs.SecondBuyMaterialInt == 19 && item.getItem() == Items.EMERALD){
+            ItemStack itemStack;
+            Item itemChosen = getRandomItem();
                 if (itemChosen.getMaxCount() < item.getCount()) {
                     itemStack = new ItemStack(itemChosen, itemChosen.getMaxCount());
                 } else {
                     itemStack = new ItemStack(itemChosen, item.getCount());
                 }
-                return itemStack;
-            }
+            return itemStack;
         } else if (ModConfigs.SecondBuyMaterialInt == 20){
             ItemStack itemStack;
             Item itemChosen = getRandomItem();
-            if (itemChosen.getMaxCount() < item.getCount()) {
-                itemStack = new ItemStack(itemChosen, itemChosen.getMaxCount());
+//            if (itemChosen.getMaxCount() < item.getCount()) {
+//                itemStack = new ItemStack(itemChosen, itemChosen.getMaxCount());
+//            } else {
+//                itemStack = new ItemStack(itemChosen, item.getCount());
+//            }
+            if(item.getCount() == 0) {
+                itemStack = item;
             } else {
-                itemStack = new ItemStack(itemChosen, item.getCount());
+                itemStack = new ItemStack(itemChosen, roll.nextInt(itemChosen.getMaxCount()) + 1);
             }
             return itemStack;
         } else {
@@ -82,34 +90,36 @@ public class CustomTradeMaterial{
                 item = new ItemStack(returnItemFromInt(ModConfigs.SecondBuyMaterialInt), item.getCount());
             return item;
         }
-        return new ItemStack(Items.EMERALD, item.getCount());
-
     }
 
     @ModifyVariable(method = "<init>(Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;IIIFI)V", at = @At("HEAD"), ordinal = 2)
     private static ItemStack StormlightMod$replaceSellItem(ItemStack item)
     {
+        Random roll = new Random();
         if(ModConfigs.SellMaterialInt == 18) {
             ItemStack itemStack = disableAllItems();
             return itemStack;
-        } else if (ModConfigs.SellMaterialInt == 19){
-            if (item.getItem() == Items.EMERALD) {
-                ItemStack itemStack;
-                Item itemChosen = getRandomItem();
+        } else if (ModConfigs.SellMaterialInt == 19 && item.getItem() == Items.EMERALD){
+            ItemStack itemStack;
+            Item itemChosen = getRandomItem();
                 if (itemChosen.getMaxCount() < item.getCount()) {
                     itemStack = new ItemStack(itemChosen, itemChosen.getMaxCount());
                 } else {
                     itemStack = new ItemStack(itemChosen, item.getCount());
                 }
-                return itemStack;
-            }
+            return itemStack;
         } else if (ModConfigs.SellMaterialInt == 20){
             ItemStack itemStack;
             Item itemChosen = getRandomItem();
-            if (itemChosen.getMaxCount() < item.getCount()) {
-                itemStack = new ItemStack(itemChosen, itemChosen.getMaxCount());
+//            if (itemChosen.getMaxCount() < item.getCount()) {
+//                itemStack = new ItemStack(itemChosen, itemChosen.getMaxCount());
+//            } else {
+//                itemStack = new ItemStack(itemChosen, item.getCount());
+//            }
+            if(item.getCount() == 0) {
+                itemStack = item;
             } else {
-                itemStack = new ItemStack(itemChosen, item.getCount());
+                itemStack = new ItemStack(itemChosen, roll.nextInt(itemChosen.getMaxCount()) + 1);
             }
             return itemStack;
         } else {
@@ -117,8 +127,6 @@ public class CustomTradeMaterial{
                 item = new ItemStack(returnItemFromInt(ModConfigs.SellMaterialInt), item.getCount());
             return item;
         }
-        return new ItemStack(Items.EMERALD, item.getCount());
-
     }
     private static Item returnItemFromInt(int integerDenotion) {
         Item item;
@@ -222,7 +230,7 @@ public class CustomTradeMaterial{
     private static boolean Illegal(Item item) {
         return item == Items.BARRIER || item == null || item == Items.COMMAND_BLOCK || item == Items.COMMAND_BLOCK_MINECART ||
                 item == Items.CHAIN_COMMAND_BLOCK || item == Items.REPEATING_COMMAND_BLOCK || item == Items.STRUCTURE_BLOCK ||
-                item == Items.STRUCTURE_VOID || item == Items.AIR;
+                item == Items.STRUCTURE_VOID || item == Items.AIR || item == Items.BEDROCK;
     }
 
 }
