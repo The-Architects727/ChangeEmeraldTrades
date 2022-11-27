@@ -1,29 +1,40 @@
 # Different Emerald Trades
 
-A Simple Mod to allow users to change out the emeralds in villager trades. 
+A Simple Mod to allow users to change out the emeralds in villager trades.
+
+Requires Fabric
 
 Configuration:
 
-The configuration is done through integers in the form
+Disable.All.Trades=false #boolean | default: false
+Randomize.Emeralds=false #boolean | default: false
+Randomize.Everything=false #boolean | default: false
+Get.Value.From.Item.IDs=false #boolean | default: false
 
-First.Buy.Material.Integer.Provider=1 #int | default: 1
-Second.Buy.Material.Integer.Provider=1 #int | default: 1
-Sell.Material.Integer.Provider=1 #int | default: 1
+and
 
-Replace the number just after the equals sign with one of the following:
+First.Buy.Item.Provider=minecraft:emerald #string | default: minecraft:emerald
+Second.Buy.Item.Provider=minecraft:emerald #string | default: minecraft:emerald
+Sell.Item.Provider=minecraft:emerald #string | default: minecraft:emerald
+ 
 
-1: Emerald, 
-2: Diamond, 
-3: Iron Ingot, 4: Raw Iron, 5: Iron Nugget, 
-6: Gold Ingot, 7: Raw Gold, 8: Gold Nugget, 
-9: Copper Ingot, 10: Raw Copper, 
-11: Amethyst, 
-12: Coal, 
-13: Lapis, 
-14: Redstone, 
-15: Quartz, 
-16: Glowstone Dust, 
-17: Dirt, 
-18: Disable all trades, 
-19: All emeralds are random items, 
-20: All items are random,
+Each slot can be a different config. If you want all options to be the same, then you MUST have the same option on each line. and
+For the Item ID section simply replace the minecraft:air with the item id of the item you want, as though you were using the /give command. for example:
+minecraft:iron_ingot
+or if modded, for example:
+emerald_tools:ruby
+
+for having all emeralds replaced with diamonds the config will look like:
+
+Config.With.Integers=: #ONLY set the option you want to true | default: :
+Disable.All.Trades=false #boolean | default: false
+Randomize.Emeralds=false #boolean | default: false
+Randomize.Everything=false #boolean | default: false
+Get.Value.From.Item.IDs=true #boolean | default: false
+Config.With.Item.IDs=: #Replace minecraft:emerald with any other item in the same format, as though you were using the /give command. | default: :
+First.Buy.Item.Provider=minecraft:diamond #string | default: minecraft:emerald
+Second.Buy.Item.Provider=minecraft:diamond #string | default: minecraft:emerald
+Sell.Item.Provider=minecraft:diamond #string | default: minecraft:emerald
+
+
+
