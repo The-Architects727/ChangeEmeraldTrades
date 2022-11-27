@@ -10,13 +10,14 @@ import net.minecraft.util.registry.Registry;
 public class ModConfigs {
     public static SimpleConfig CONFIG;
     private static ModConfigProvider configs;
-    public static int FirstBuyMaterialInt;
-    public static int SecondBuyMaterialInt;
-    public static int SellMaterialInt;
 
-    public static Item FirstBuyMaterial;
-    public static Item SecondBuyMaterial;
-    public static Item SellMaterial;
+    public static boolean DisableTrades;
+
+    public static boolean RandomEmeralds;
+
+    public static boolean RandomEverything;
+
+    public static boolean ItemFromID;
 
     public static String FirstBuyMaterialString;
     public static String SecondBuyMaterialString;
@@ -32,12 +33,13 @@ public class ModConfigs {
     }
 
     private static void createConfigs() {
-        configs.addKeyValuePair(new Pair<>("Config.With.Integers", ":"), "Buy Material== 1: Disable trading, 2: Randomize Emeralds, 3: Randomize Everything");
-        configs.addKeyValuePair(new Pair<>("First.Buy.Integer.Provider", 0), "int");
-        configs.addKeyValuePair(new Pair<>("Second.Buy.Integer.Provider", 0), "int");
-        configs.addKeyValuePair(new Pair<>("Sell.Integer.Provider", 0), "int");
+        configs.addKeyValuePair(new Pair<>("Config.With.Integers", ":"), "ONLY set the option you want to true");
+        configs.addKeyValuePair(new Pair<>("Disable.All.Trades", false), "boolean");
+        configs.addKeyValuePair(new Pair<>("Randomize.Emeralds", false), "boolean");
+        configs.addKeyValuePair(new Pair<>("Randomize.Everything", false), "boolean");
+        configs.addKeyValuePair(new Pair<>("Get.Value.From.Item.IDs", false), "boolean");
 
-        configs.addKeyValuePair(new Pair<>("Config.With.Item.IDs", ":"), "If you want any of the above options then leave the following as minecraft:air ");
+        configs.addKeyValuePair(new Pair<>("Config.With.Item.IDs", ":"), "Replace minecraft:emerald with any other item in the same format, as though you were using the /give command.");
 
         configs.addKeyValuePair(new Pair<>("First.Buy.Item.Provider", "minecraft:emerald"), "string");
         configs.addKeyValuePair(new Pair<>("Second.Buy.Item.Provider", "minecraft:emerald"), "string");
@@ -45,17 +47,14 @@ public class ModConfigs {
     }
 
     private static void assignConfigs() {
-        FirstBuyMaterialInt = CONFIG.getOrDefault("First.Buy.Integer.Provider", 0);
-        SecondBuyMaterialInt = CONFIG.getOrDefault("Second.Buy.Integer.Provider", 0);
-        SellMaterialInt = CONFIG.getOrDefault("Sell.Integer.Provider", 0);
+        DisableTrades = CONFIG.getOrDefault("Disable.All.Trades", false);
+        RandomEmeralds = CONFIG.getOrDefault("Randomize.Emeralds", false);
+        RandomEverything = CONFIG.getOrDefault("Randomize.Everything", false);
+        ItemFromID = CONFIG.getOrDefault("Get.Value.From.Item.IDs", false);
 
         FirstBuyMaterialString =  CONFIG.getOrDefault("First.Buy.Item.Provider", "minecraft:emerald");
         SecondBuyMaterialString =  CONFIG.getOrDefault("Second.Buy.Item.Provider", "minecraft:emerald");
         SellMaterialString =  CONFIG.getOrDefault("Sell.Item.Provider", "minecraft:emerald");
-
-//        FirstBuyMaterial =  Registry.ITEM.get(Identifier.tryParse(CONFIG.getOrDefault("First.Buy.Item.Provider", "minecraft:air")));
-//        SecondBuyMaterial =  Registry.ITEM.get(Identifier.tryParse(CONFIG.getOrDefault("Second.Buy.Item.Provider", "minecraft:air")));
-//        SellMaterial =  Registry.ITEM.get(Identifier.tryParse(CONFIG.getOrDefault("Sell.Item.Provider", "minecraft:air")));
 
         System.out.println("All " + configs.getConfigsList().size() + " have been set properly");
     }
