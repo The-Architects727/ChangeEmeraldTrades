@@ -4,6 +4,7 @@ import net.architects.CustomVillagerMaterialsMod.config.ModConfigs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.random.CheckedRandom;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.village.TradeOffer;
@@ -21,11 +22,12 @@ public class CustomTradeMaterial{
     @ModifyVariable(method = "<init>(Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;IIIFI)V", at = @At("HEAD"), ordinal = 0)
     private static ItemStack StormlightMod$replaceFirstBuyItem(ItemStack item)
     {
-        Random roll = new Random();
-        if(ModConfigs.FirstBuyMaterialInt == 18) {
-            ItemStack itemStack = disableAllItems();
-            return itemStack;
-        } else if (ModConfigs.FirstBuyMaterialInt == 19 && item.getItem() == Items.EMERALD){
+        if(ModConfigs.FirstBuyMaterialInt != 0) {
+            Random roll = new Random();
+            if(ModConfigs.FirstBuyMaterialInt == 1) {
+                ItemStack itemStack = disableAllItems();
+                return itemStack;
+            } else if (ModConfigs.FirstBuyMaterialInt == 2 && item.getItem() == Items.EMERALD){
                 ItemStack itemStack;
                 Item itemChosen = getRandomItem();
                 if (itemChosen.getMaxCount() < item.getCount()) {
@@ -34,180 +36,120 @@ public class CustomTradeMaterial{
                     itemStack = new ItemStack(itemChosen, item.getCount());
                 }
                 return itemStack;
-        } else if (ModConfigs.FirstBuyMaterialInt == 20){
-            ItemStack itemStack;
-            Item itemChosen = getRandomItem();
+            } else if (ModConfigs.FirstBuyMaterialInt == 3){
+                ItemStack itemStack;
+                Item itemChosen = getRandomItem();
 //            if (itemChosen.getMaxCount() < item.getCount()) {
 //                itemStack = new ItemStack(itemChosen, itemChosen.getMaxCount());
 //            } else {
 //                itemStack = new ItemStack(itemChosen, item.getCount());
 //            }
-            if(item.getCount() == 0) {
-                itemStack = item;
+                if(item.getCount() == 0) {
+                    itemStack = item;
+                } else {
+                    itemStack = new ItemStack(itemChosen, roll.nextInt(itemChosen.getMaxCount()) + 1);
+                }
+                return itemStack;
             } else {
-                itemStack = new ItemStack(itemChosen, roll.nextInt(itemChosen.getMaxCount()) + 1);
+                return item;
             }
-            return itemStack;
         } else {
-            if (item.getItem() == Items.EMERALD)
-                item = new ItemStack(returnItemFromInt(ModConfigs.FirstBuyMaterialInt), item.getCount());
-            return item;
+            if (item.getItem() == Items.EMERALD) {
+                return new ItemStack(Registry.ITEM.get(Identifier.tryParse(ModConfigs.FirstBuyMaterialString)), item.getCount());
+            } else {
+                return item;
+            }
         }
+
     }
 
     @ModifyVariable(method = "<init>(Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;IIIFI)V", at = @At("HEAD"), ordinal = 1)
     private static ItemStack StormlightMod$replaceSecondBuyItem(ItemStack item)
     {
-        Random roll = new Random();
-        if(ModConfigs.SecondBuyMaterialInt == 18) {
-            ItemStack itemStack = disableAllItems();
-            return itemStack;
-        } else if (ModConfigs.SecondBuyMaterialInt == 19 && item.getItem() == Items.EMERALD){
-            ItemStack itemStack;
-            Item itemChosen = getRandomItem();
+        if(ModConfigs.SecondBuyMaterialInt != 0) {
+            Random roll = new Random();
+            if(ModConfigs.SecondBuyMaterialInt == 1) {
+                ItemStack itemStack = disableAllItems();
+                return itemStack;
+            } else if (ModConfigs.SecondBuyMaterialInt == 2 && item.getItem() == Items.EMERALD){
+                ItemStack itemStack;
+                Item itemChosen = getRandomItem();
                 if (itemChosen.getMaxCount() < item.getCount()) {
                     itemStack = new ItemStack(itemChosen, itemChosen.getMaxCount());
                 } else {
                     itemStack = new ItemStack(itemChosen, item.getCount());
                 }
-            return itemStack;
-        } else if (ModConfigs.SecondBuyMaterialInt == 20){
-            ItemStack itemStack;
-            Item itemChosen = getRandomItem();
+                return itemStack;
+            } else if (ModConfigs.SecondBuyMaterialInt == 3){
+                ItemStack itemStack;
+                Item itemChosen = getRandomItem();
 //            if (itemChosen.getMaxCount() < item.getCount()) {
 //                itemStack = new ItemStack(itemChosen, itemChosen.getMaxCount());
 //            } else {
 //                itemStack = new ItemStack(itemChosen, item.getCount());
 //            }
-            if(item.getCount() == 0) {
-                itemStack = item;
+                if(item.getCount() == 0) {
+                    itemStack = item;
+                } else {
+                    itemStack = new ItemStack(itemChosen, roll.nextInt(itemChosen.getMaxCount()) + 1);
+                }
+                return itemStack;
             } else {
-                itemStack = new ItemStack(itemChosen, roll.nextInt(itemChosen.getMaxCount()) + 1);
+                return item;
             }
-            return itemStack;
         } else {
-            if (item.getItem() == Items.EMERALD)
-                item = new ItemStack(returnItemFromInt(ModConfigs.SecondBuyMaterialInt), item.getCount());
-            return item;
+            if (item.getItem() == Items.EMERALD) {
+                return new ItemStack(Registry.ITEM.get(Identifier.tryParse(ModConfigs.SecondBuyMaterialString)), item.getCount());
+            } else {
+                return item;
+            }
         }
+
     }
 
     @ModifyVariable(method = "<init>(Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;IIIFI)V", at = @At("HEAD"), ordinal = 2)
     private static ItemStack StormlightMod$replaceSellItem(ItemStack item)
     {
-        Random roll = new Random();
-        if(ModConfigs.SellMaterialInt == 18) {
-            ItemStack itemStack = disableAllItems();
-            return itemStack;
-        } else if (ModConfigs.SellMaterialInt == 19 && item.getItem() == Items.EMERALD){
-            ItemStack itemStack;
-            Item itemChosen = getRandomItem();
+        if(ModConfigs.SellMaterialInt != 0) {
+            Random roll = new Random();
+            if(ModConfigs.SellMaterialInt == 1) {
+                ItemStack itemStack = disableAllItems();
+                return itemStack;
+            } else if (ModConfigs.SellMaterialInt == 2 && item.getItem() == Items.EMERALD){
+                ItemStack itemStack;
+                Item itemChosen = getRandomItem();
                 if (itemChosen.getMaxCount() < item.getCount()) {
                     itemStack = new ItemStack(itemChosen, itemChosen.getMaxCount());
                 } else {
                     itemStack = new ItemStack(itemChosen, item.getCount());
                 }
-            return itemStack;
-        } else if (ModConfigs.SellMaterialInt == 20){
-            ItemStack itemStack;
-            Item itemChosen = getRandomItem();
+                return itemStack;
+            } else if (ModConfigs.SellMaterialInt == 3){
+                ItemStack itemStack;
+                Item itemChosen = getRandomItem();
 //            if (itemChosen.getMaxCount() < item.getCount()) {
 //                itemStack = new ItemStack(itemChosen, itemChosen.getMaxCount());
 //            } else {
 //                itemStack = new ItemStack(itemChosen, item.getCount());
 //            }
-            if(item.getCount() == 0) {
-                itemStack = item;
+                if(item.getCount() == 0) {
+                    itemStack = item;
+                } else {
+                    itemStack = new ItemStack(itemChosen, roll.nextInt(itemChosen.getMaxCount()) + 1);
+                }
+                return itemStack;
             } else {
-                itemStack = new ItemStack(itemChosen, roll.nextInt(itemChosen.getMaxCount()) + 1);
+                return item;
             }
-            return itemStack;
         } else {
-            if (item.getItem() == Items.EMERALD)
-                item = new ItemStack(returnItemFromInt(ModConfigs.SellMaterialInt), item.getCount());
-            return item;
+            if (item.getItem() == Items.EMERALD) {
+                return new ItemStack(Registry.ITEM.get(Identifier.tryParse(ModConfigs.SellMaterialString)), item.getCount());
+            } else {
+                return item;
+            }
         }
+
     }
-    private static Item returnItemFromInt(int integerDenotion) {
-        Item item;
-        switch(integerDenotion)
-        {
-            case 2 :
-                item = Items.DIAMOND;
-                break;
-
-            case 3 :
-                item = Items.IRON_INGOT;
-                break;
-
-            case 4 :
-                item = Items.RAW_IRON;
-                break;
-
-            case 5 :
-                item = Items.IRON_NUGGET;
-                break;
-
-            case 6 :
-                item = Items.GOLD_INGOT;
-                break;
-
-            case 7 :
-                item = Items.RAW_GOLD;
-                break;
-
-            case 8 :
-                item = Items.GOLD_NUGGET;
-                break;
-
-            case 9 :
-                item = Items.COPPER_INGOT;
-                break;
-
-            case 10 :
-                item = Items.RAW_COPPER;
-                break;
-
-            case 11 :
-                item = Items.AMETHYST_SHARD;
-                break;
-
-            case 12 :
-                item = Items.COAL;
-                break;
-
-            case 13 :
-                item = Items.LAPIS_LAZULI;
-                break;
-
-            case 14 :
-                item = Items.REDSTONE;
-                break;
-
-            case 15 :
-                item = Items.QUARTZ;
-                break;
-
-            case 16 :
-                item = Items.GLOWSTONE_DUST;
-                break;
-
-            case 17 :
-                item = Items.DIRT;
-                break;
-
-            default :
-                item = Items.EMERALD;
-        }
-
-        if(item == null) {
-            item = Items.EMERALD;
-        }
-
-        return item;
-    }
-
-    private static Random rollSeed = new Random();
 
     private static ItemStack disableAllItems() {
         ItemStack stack = new ItemStack(Items.AIR, 0);
